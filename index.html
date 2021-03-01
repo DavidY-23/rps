@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rock Paper Scissors</title>
+  <meta charset="UTF-8"/>
+</head>
+<body>
+
+    <button  id="rock">Rock!</button> 
+    <button  id="paper">Paper!</button> 
+    <button  id="scissor">Scissor!</button> 
+    <!-- Score-->
+    <p id="score"></p>
+    <!-- Results-->
+    <p id="results"></p>
+    <!-- Displays the choice. -->
+    <p id="choice"></p>
+    <script type="text/javascript">
+
+    //Chooses random choice for computer.
+    function computerPlay()
+    {
+        let choice = ["rock", "paper", "scissors"];
+        choice = choice[Math.floor(Math.random()*choice.length)];
+        console.log(choice);
+        return choice;
+    }
+
+
+    document.getElementById("rock").addEventListener("click", playerSelection);
+    document.getElementById("paper").addEventListener("click", playerSelection);
+    document.getElementById("scissor").addEventListener("click", playerSelection);
+
+
+    function playerSelection(event)
+    {  
+        let humanchoice;
+        console.log("You clicked the " + event.target.id +  " element!");
+        if (event.target.id == "rock")
+        {
+            const computerSelection = computerPlay();
+            document.getElementById("choice").innerHTML += "You picked rock!" + '<br />';
+            console.log("Choice is rock");
+            humanchoice = event.target.id;
+            playRound(humanchoice, computerSelection);
+
+        }
+        else if (event.target.id == "paper")
+        {
+            const computerSelection = computerPlay();
+            document.getElementById("choice").innerHTML += "You picked paper!" + '<br />';
+            console.log("Choice is scissor");
+            humanchoice = event.target.id;
+            playRound(humanchoice, computerSelection);
+
+        }
+        else if  (event.target.id == "scissor")
+        {
+            const computerSelection = computerPlay();
+            document.getElementById("choice").innerHTML += "You picked scissor!" + '<br />';
+            console.log("Choice is scissor");
+            humanchoice = event.target.id;
+            playRound(humanchoice, computerSelection);
+        }
+        return humanchoice;
+    }
+    //Scores
+    let humanScore = 0;
+    let computerScore = 0;
+
+    function playRound(playerPlay, computerSelection) 
+      {
+        console.log("COMPUTER SCORE IS: " + computerScore);
+        if (computerScore === 5)
+        {
+            document.getElementById("results").innerHTML = "The computer won!";
+            humanScore = 0;
+            computerScore = 0;
+        }
+        if (humanScore === 5)
+        {
+            document.getElementById("results").innerHTML = "You won!";
+            humanScore = 0;
+            computerScore = 0;
+        }
+        if (playerPlay === "rock")
+        {
+            if (computerSelection === "paper")
+            {
+                computerScore = computerScore + 1;
+                console.log('The score is:' + computerScore);
+                document.getElementById("choice").innerHTML += "The bot chose paper!" + '<br />';
+                document.getElementById("choice").innerHTML += "You lost!" + '<br />' + '<br />';
+                document.getElementById("score").innerHTML = "Your score is " + humanScore + " The computer's score is " + computerScore;
+            }
+            else if (computerSelection === "rock")
+            {
+                document.getElementById("choice").innerHTML += "The bot chose rock!" + '<br />';
+                document.getElementById("choice").innerHTML += "You tied!" + '<br />' + '<br />';
+            }
+            else
+            {
+                humanScore++;
+                document.getElementById("choice").innerHTML += "The bot chose scissor!" + '<br />';
+                document.getElementById("choice").innerHTML += "You won!" + '<br />' + '<br />';
+                document.getElementById("score").innerHTML = "Your score is " + humanScore + " The computer's score is " + computerScore;
+            }
+        }
+        else if (playerPlay === "paper")
+        {
+            if (computerSelection === "paper")
+            {
+                document.getElementById("choice").innerHTML += "The bot chose paper!" + '<br />';
+                document.getElementById("choice").innerHTML += "You tied!" + '<br />' + '<br />';
+            }
+            else if (computerSelection === "rock")
+            {
+                document.getElementById("choice").innerHTML += "The bot chose rock!" + '<br />';
+                document.getElementById("choice").innerHTML += "You won!" + '<br />' + '<br />';
+                document.getElementById("score").innerHTML = "Your score is " + humanScore + " The computer's score is " + computerScore;
+
+            }
+            else
+            {
+                document.getElementById("choice").innerHTML += "The bot chose scissor!" + '<br />';
+                document.getElementById("choice").innerHTML += "You lost!" + '<br />' + '<br />';
+                computerScore++;
+                document.getElementById("score").innerHTML = "Your score is " + humanScore + " The computer's score is " + computerScore;
+
+            }
+        }
+        else
+        {
+            if (computerSelection === "paper")
+            {
+                humanScore++;
+                document.getElementById("choice").innerHTML += "The bot chose paper!" + '<br />';
+                document.getElementById("choice").innerHTML += "You won!" + '<br />' + '<br />';
+                document.getElementById("score").innerHTML = "Your score is " + humanScore + " The computer's score is " + computerScore;
+
+            }
+            else if (computerSelection === "rock")
+            {
+                document.getElementById("choice").innerHTML += "The bot chose rock!" + '<br />';
+                document.getElementById("choice").innerHTML += "You lost!" + '<br />' + '<br />';
+                computerScore++;
+                document.getElementById("score").innerHTML = "Your score is " + humanScore + " The computer's score is " + computerScore;
+
+            }
+            else
+            {
+                document.getElementById("choice").innerHTML += "The bot chose scissor!" + '<br />';
+                document.getElementById("choice").innerHTML += "You tied!" + '<br />'  + '<br />';
+            }
+        }
+
+
+      }
+
+      
+
+
+  </script>
+</body>
+</html>
